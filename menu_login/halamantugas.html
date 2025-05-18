@@ -211,8 +211,8 @@
       background: #e0e0e0;
     }
 
-    /* Filter and Sort Groups */
-    .filter-group, .sort-group {
+    /* Filter and Sort Buttons */
+    .filters, .sorts {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -220,23 +220,45 @@
       align-items: center;
     }
 
-    .filter-group span, .sort-group span {
+    .filters span, .sorts span {
       font-weight: bold;
     }
 
-    .filter-group button, .sort-group button {
+    .filters button, .sorts button {
       padding: 8px 15px;
       border: none;
       border-radius: 10px;
       background: white;
-      font-weight: bold;
+      font-weight: normal;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: background 0.2s;
     }
 
-    .filter-group button:hover, .sort-group button:hover {
+    .filters button:hover, .sorts button:hover {
       background: #e0e0e0;
+    }
+    /* Filter and Sort Buttons */
+    .filters, .sorts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .filters button.active,
+    .sorts button.active {
+    background-color: #7cdacc;
+    color: white;
+    font-weight: bold;
+    }
+    .filters button,
+    .sorts button {
+    transition: background-color 0.3s, color 0.3s;
+    }
+    .judul-tugas {
+    font-weight: bold;
+    color: black;
     }
 
     /* Task List */
@@ -359,6 +381,19 @@
     .hamburger-btn.active .hamburger-line:nth-child(3) {
       transform: translateY(-8px) rotate(-45deg);
     }
+    .task-card.selesai {
+    background: #cce6cc;
+    border-left: 6px solid #4CAF50;
+    opacity: 0.8;
+    position: relative;
+    }
+
+    .task-card.selesai h3,
+    .task-card.selesai p {
+    text-decoration: line-through #ffffff;
+    color: #000000;
+    }
+
 
     @media (max-width: 768px) {
       .hamburger-btn {
@@ -400,15 +435,15 @@
       background: #666;
     }
 
-    body.dark-mode .filter-group button,
-    body.dark-mode .sort-group button {
-      background: #444;
-      color: white;
+    body.dark-mode .filters button,
+    body.dark-mode .sorts button {
+      background: #C0FFC8;
+      color: rgb(0, 0, 0);
     }
-
-    body.dark-mode .filter-group button:hover,
-    body.dark-mode .sort-group button:hover {
-      background: #666;
+    body.dark-mode .filters button.active,
+    body.dark-mode .sorts button.active {
+    background-color: #7cdacc; /* bisa pakai warna yang kontras di dark mode */
+    color: rgb(0, 0, 0);
     }
 
     body.dark-mode .task-card {
@@ -417,7 +452,7 @@
     }
 
     body.dark-mode .task-card button {
-      background: #444;
+      background: #000000;
       color: white;
     }
 
@@ -446,6 +481,16 @@
         background: rgba(0, 0, 0, 0.7);
       }
     }
+    .main-content .header h1,
+    .main-content .header p {
+    color: black;
+    }
+
+    body.dark-mode .main-content .header h1,
+    body.dark-mode .main-content .header p {
+    color: white;
+    }
+
   </style>
 </head>
 <body>
@@ -493,24 +538,23 @@
       <div class="content-wrapper">
         <div class="header">
           <div>
-            <h1>Halaman Tugas</h1>
+            <h1 class="judul-tugas">Halaman Tugas</h1>
             <p>Kelola Tugas Kamu Disini</p>
           </div>
-          <button class="btn">+ Tugas Baru</button>
         </div>
 
-        <div class="filter-group">
-          <span>Filter Tugas :</span>
-          <button>Paling Mendesak</button>
-          <button>Mendesak</button>
-          <button>Kurang Mendesak</button>
+       <div class="filters">
+        <span>Filter:</span>
+        <button>Paling Mendesak</button>
+        <button>Mendesak</button>
+        <button>Kurang Mendesak</button>
         </div>
 
-        <div class="sort-group">
-          <span>Urutkan :</span>
-          <button>Semua Tugas</button>
-          <button>Hari Ini</button>
-          <button>Minggu Ini</button>
+        <div class="sorts">
+        <span>Urutkan:</span>
+        <button>Semua Tugas</button>
+        <button>Hari Ini</button>
+        <button>Minggu Ini</button>
         </div>
 
         <div class="task-list">
@@ -589,6 +633,57 @@
         }
       });
     });
+    // Tangani tombol filter
+  const filterButtons = document.querySelectorAll('.filters button');
+  let activeFilter = null;
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (activeFilter === button) {
+        button.classList.remove('active');
+        activeFilter = null;
+      } else {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeFilter = button;
+      }
+    });
+  });
+
+  // Tangani tombol urutan
+  const sortButtons = document.querySelectorAll('.sorts button');
+  let activeSort = null;
+
+  sortButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (activeSort === button) {
+        button.classList.remove('active');
+        activeSort = null;
+      } else {
+        sortButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeSort = button;
+      }
+    });
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    const selesaiButtons = document.querySelectorAll(".task-card button");
+
+    selesaiButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const card = button.closest(".task-card");
+
+        // Toggle class 'selesai'
+        const isSelesai = card.classList.toggle("selesai");
+
+        if (isSelesai) {
+          button.textContent = "Selesai ✅";
+        } else {
+          button.textContent = "Tandai Selesai";
+        }
+      });
+    });
+  });
 
     // Dark mode detection
     window.addEventListener('DOMContentLoaded', () => {

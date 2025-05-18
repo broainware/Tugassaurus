@@ -284,6 +284,28 @@
       color: white;
       font-weight: bold;
     }
+    .filter-buttons button {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Contoh style aktif dan default */
+  .filter-buttons button.active {
+    background-color: #7cdacc; /* hijau */
+    color: white;
+  }
+
+  .filter-buttons button {
+    background-color: white;
+    color: #333;
+  }
+  .calendar-subtext {
+  color: black;
+}
+
+body.dark-mode .calendar-subtext {
+  color: white;
+}
+
     
     .calendar {
       max-width: 100%;
@@ -339,10 +361,18 @@
       background: rgba(0,0,0,0.05);
     }
     
-    .day.today {
-      background: #a4ecdf;
+   .day.today {
+      background: #7cdacc;
       font-weight: bold;
+      color: black; /* tambahkan ini */
     }
+    .day.selected {
+    background-color: #026b6b; /* warna lebih kontras dari yang lama */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 0 2px #3da4a4 inset;
+  }
+
     
     .task-list {
       margin-top: 1rem;
@@ -414,12 +444,12 @@
     }
 
     body.dark-mode .filter-buttons button {
-      background: #4a5568;
-      color: white;
+      background: #C0FFC8;
+      color: rgb(0, 0, 0);
     }
 
     body.dark-mode .filter-buttons button.active {
-      background-color: #60CCCC;
+      background-color: #7cdacc;
     }
 
     body.dark-mode .calendar-weekdays {
@@ -489,7 +519,7 @@
     <main class="main-content" id="mainContent">
       <div class="content-wrapper">
         <h1 class="font-extrabold text-xl md:text-2xl mb-1">Kalender Tugas</h1>
-        <p class="text-xs md:text-sm font-semibold mb-4 text-black/60">Kelola tugas kamu disini</p>
+        <p class="text-xs md:text-sm font-semibold mb-4 calendar-subtext">Kelola tugas kamu disini</p>
         
         <div class="filter-section">
           <span class="filter-label">Filter Tugas:</span>
@@ -569,6 +599,7 @@
         }
       });
     });
+    
 
     // Calendar functionality
     const calendarGrid = document.getElementById("calendarGrid");
@@ -603,6 +634,13 @@
           `</ul>`;
       }
     }
+    document.getElementById('calendarGrid').addEventListener('click', function (e) {
+  if (e.target.classList.contains('day')) {
+    document.querySelectorAll('.day.selected').forEach(d => d.classList.remove('selected'));
+    e.target.classList.add('selected');
+  }
+});
+
 
     function renderCalendar() {
       calendarGrid.innerHTML = "";
@@ -698,28 +736,43 @@
       updateFilteredTasksDisplay();
     }
 
-    // Filter buttons functionality
-    document.querySelectorAll('.filter-buttons button').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const text = e.target.innerText.trim();
-        
-        if (["Paling Mendesak", "Mendesak", "Kurang Mendesak", "Semua Tugas"].includes(text)) {
-          currentFilter = text;
-        }
+   document.querySelectorAll('.filter-buttons button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const text = e.target.innerText.trim();
+    const parent = e.target.parentElement;
+    const isAlreadyActive = e.target.classList.contains('active');
 
-        if (["Hari Ini", "Minggu Ini", "Semua Tugas"].includes(text)) {
-          currentSort = text;
-        }
+    // Hapus semua 'active' dalam grup tombol (di parent)
+    parent.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
 
-        renderCalendar();
-        updateFilteredTasksDisplay();
+    // Kalau tombol ini belum aktif → aktifkan dan set currentFilter/sort
+    if (!isAlreadyActive) {
+      e.target.classList.add('active');
 
-        // Tambahkan kelas aktif untuk tombol
-        const parent = e.target.parentElement;
-        parent.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-      });
-    });
+      // Atur currentFilter atau currentSort sesuai grup
+      if (["Paling Mendesak", "Mendesak", "Kurang Mendesak", "Semua Tugas"].includes(text)) {
+        currentFilter = text;
+      }
+
+      if (["Hari Ini", "Minggu Ini", "Semua Tugas"].includes(text)) {
+        currentSort = text;
+      }
+    } else {
+      // Kalau tombol diklik lagi (sudah aktif), reset nilai
+      if (["Paling Mendesak", "Mendesak", "Kurang Mendesak", "Semua Tugas"].includes(text)) {
+        currentFilter = null;
+      }
+
+      if (["Hari Ini", "Minggu Ini", "Semua Tugas"].includes(text)) {
+        currentSort = null;
+      }
+    }
+
+    renderCalendar();
+    updateFilteredTasksDisplay();
+  });
+});
+
 
     // Initialize calendar
     renderCalendar();
