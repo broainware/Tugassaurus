@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pengaturan - Tugasaurus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     * {
       margin: 0;
@@ -16,28 +19,66 @@
       background: linear-gradient(to bottom, #C0FFC8, #60CCCC);
       min-height: 100vh;
       margin: 0;
+      padding: 0;
     }
 
-    .main-wrapper {
+    .container {
       display: flex;
       min-height: 100vh;
+      position: relative;
       padding: 20px;
+      justify-content: flex-start;
+      align-items: flex-start;
     }
 
+    /* Improved Sidebar */
     .sidebar {
       width: 250px;
       padding: 20px;
       background: rgba(255, 255, 255, 0.2);
       display: flex;
+      font-size: 13.2px;
       flex-direction: column;
       justify-content: space-between;
       border-right: 1px solid #ccc;
       border-radius: 20px;
+      height: auto;
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  backdrop-filter 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        max-height: 80vh;
+        overflow-y: auto;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      .sidebar.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: all;
+      }
     }
 
     .logo {
       display: flex;
       align-items: center;
+      font-weight: bold;
+      font-size: x-large;
       gap: 10px;
       margin-bottom: 30px;
     }
@@ -64,6 +105,7 @@
       align-items: center;
       gap: 10px;
       transition: background 0.3s;
+      width: 100%;
     }
 
     .menu button:hover {
@@ -71,11 +113,13 @@
     }
 
     .profile-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
+     text-decoration: none;
+     color: inherit;
+     display: block;
+     margin-top: 15px;
     }
-
+    
+    /* Clickable Profile */
     .profile {
       display: flex;
       align-items: center;
@@ -100,36 +144,115 @@
       background: #ccc;
     }
 
+    /* Main Content */
     .main-content {
       flex: 1;
+      padding: 30px 30px 30px 0;
+      margin-left: 30px;
+      width: calc(100% - 300px);
+      min-height: calc(100vh - 40px);
+      position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 20px;
+      align-items: flex-start;
     }
 
-    .main-inner {
-      text-align: center;
+    @media (max-width: 768px) {
+      .main-content {
+        width: 100%;
+        margin: 20px;
+        padding: 20px;
+        margin-left: 0;
+      }
+    }
+
+    .content-wrapper {
       max-width: 700px;
       width: 100%;
     }
 
-    .main-inner h1 {
-      font-size: 24px;
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: none;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
 
-    .main-inner p {
-      color: gray;
-      margin-bottom: 30px;
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+      display: block;
     }
 
+    /* Hamburger Button */
+    .hamburger-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 110;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .hamburger-btn:hover {
+      background: white;
+      transform: scale(1.05);
+    }
+    
+    .hamburger-line {
+      width: 20px;
+      height: 2px;
+      background: #333;
+      margin: 3px 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+    
+    .hamburger-btn.active .hamburger-line:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger-btn.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    
+    .hamburger-btn.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+    }
+
+    /* Setting Card Styles */
     .setting-card {
       background: #E7FAEC;
       padding: 30px;
       border-radius: 20px;
       width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
       box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
@@ -148,14 +271,14 @@
       font-weight: bold;
     }
 
-    .setting-card input {
+    .field-display {
       padding: 12px;
       border-radius: 10px;
-      border: none;
+      background: #f8f8f8;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .setting-card .toggle-row {
+    .toggle-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -194,13 +317,7 @@
       left: 21px;
     }
 
-    .field-display {
-      padding: 12px;
-      border-radius: 10px;
-      background: #f8f8f8;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
+    /* Dark Mode Styles */
     body.dark-mode {
       background: linear-gradient(to bottom, #333, #60CCCC);
       color: white;
@@ -218,6 +335,11 @@
 
     body.dark-mode .menu button:hover {
       background: #60CCCC;
+    }
+
+    body.dark-mode .profile {
+      background: #444;
+      color: white;
     }
 
     body.dark-mode .setting-card {
@@ -241,23 +363,43 @@
     }
 
     body.dark-mode .field-display {
-    background: #60CCCC;
-    color: white;
+      background: #60CCCC;
+      color: white;
     }
 
-    body.dark-mode .main-inner p {
-    color: #CCCCCC;
+    body.dark-mode .content-wrapper p {
+      color: #CCCCCC;
     }
 
+    body.dark-mode .hamburger-btn {
+      background: rgba(0, 0, 0, 0.5);
+    }
 
+    body.dark-mode .hamburger-line {
+      background: white;
+    }
+
+    /* Fallback for browsers that don't support backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      .sidebar {
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.7);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="main-wrapper">
-    <div class="sidebar">
+  <div class="container">
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
       <div>
         <div class="logo">
-          <img src="logo_tugasaurus.png" alt="Logo">
+          <img alt="logo" src="logo_tugasaurus.png"/>
           <h2>Tugasaurus</h2>
         </div>
         <div class="menu">
@@ -270,7 +412,6 @@
           <button onclick="location.href='tentang.html'">Tentang Kami</button>
         </div>
       </div>
-
       <a href="akun.html" class="profile-link">
         <div class="profile">
           <img src="https://via.placeholder.com/40" alt="Profile">
@@ -280,13 +421,21 @@
           </div>
         </div>
       </a>
-    </div>
-
-    <div class="main-content">
-      <div class="main-inner">
-        <h1>Pengaturan</h1>
-        <p>Kelola Tugas Kamu Disini</p>
-
+    </aside>
+    
+    <!-- Hamburger button (Mobile only) -->
+    <button aria-label="Toggle sidebar" id="hamburgerBtn" class="hamburger-btn">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    
+    <!-- Main content -->
+    <main class="main-content" id="mainContent">
+      <div class="content-wrapper">
+        <h1 class="font-extrabold text-xl md:text-2xl mb-1">Pengaturan</h1>
+        <p class="text-xs md:text-sm font-semibold mb-4 text-black/60">Kelola pengaturan akun kamu</p>
+        
         <div class="setting-card">
           <img src="" alt="avatar">
           <label for="username">Nama Pengguna</label>
@@ -299,17 +448,54 @@
             <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
           </div>
 
-          <!-- ✅ Tombol Toggle Mode Gelap -->
           <div class="toggle-row">
             <span>Mode Gelap</span>
             <div class="toggle-switch" id="darkModeSwitch" onclick="toggleDarkMode(this)"></div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
-
+  
   <script>
+    const sidebar = document.getElementById('sidebar');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const overlay = document.getElementById('overlay');
+    const mainContent = document.getElementById('mainContent');
+
+    // Toggle sidebar
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('active');
+      sidebar.classList.toggle('show');
+      overlay.classList.toggle('active');
+      
+      if (sidebar.classList.contains('show')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close sidebar when clicking on overlay
+    overlay.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('active');
+      sidebar.classList.remove('show');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    // Close sidebar when clicking on a menu item (mobile)
+    document.querySelectorAll('.menu button').forEach(button => {
+      button.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          hamburgerBtn.classList.remove('active');
+          sidebar.classList.remove('show');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
     function toggleSwitch(elem) {
       elem.classList.toggle('active');
     }
@@ -325,6 +511,7 @@
       }
     }
 
+    // Load user data and dark mode preference
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('theme');
       const darkSwitch = document.getElementById('darkModeSwitch');

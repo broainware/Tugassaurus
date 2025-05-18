@@ -5,7 +5,7 @@
   <title>Tugasaurus - Tentang Kami</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -39,7 +39,7 @@
       font-size: 13.2px;
       flex-direction: column;
       justify-content: space-between;
-      border: 1px solid #ccc;
+      border-right: 1px solid #ccc;
       border-radius: 20px;
       height: auto;
       position: sticky;
@@ -145,7 +145,66 @@
       width: calc(100% - 300px);
       min-height: calc(100vh - 40px);
       position: relative;
+      max-width: 1200px;
     }
+
+    /* Dark Mode Styles */
+body.dark-mode {
+  background: linear-gradient(to bottom, #333, #60CCCC);
+  color: white;
+}
+
+body.dark-mode .sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #444;
+}
+
+body.dark-mode .menu button {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .menu button:hover {
+  background: #60CCCC;
+}
+
+body.dark-mode .profile {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .faq-item {
+  border-color: #666;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .faq-question {
+  color: white;
+}
+
+body.dark-mode .faq-answer {
+  color: #CCCCCC;
+}
+
+body.dark-mode .hamburger-btn {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .hamburger-line {
+  background: white;
+}
+
+body.dark-mode .content-wrapper p {
+  color: #CCCCCC;
+}
+
+body.dark-mode a {
+  color: #60CCCC;
+}
+
+body.dark-mode .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
 
     @media (max-width: 768px) {
       .main-content {
@@ -247,6 +306,7 @@
       position: relative;
       overflow: hidden;
       width: 100%;
+      margin: 20px 0;
     }
     
     .slider {
@@ -295,36 +355,110 @@
       right: 0;
     }
 
+    /* Team Member Styles */
     .team-member {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      font-size: 10px;
-      font-weight: 400;
       transition: transform 0.3s ease;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .team-member:hover {
       transform: translateY(-5px);
-}
+      background: rgba(255, 255, 255, 0.5);
+    }
 
     .team-member-avatar {
-      width: 60px;
-      height: 60px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: black;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 3px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-member-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-member-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: #333;
+    }
+
+    .team-member-id {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #666;
     }
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
       width: 100%;
+      margin: 30px 0;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      margin-bottom: 20px;
+      color: #333;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #60CCCC;
+      border-radius: 3px;
+    }
+
+    body.dark-mode .team-member {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-mode .team-member:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .team-member-name {
+      color: white;
+    }
+
+    body.dark-mode .team-member-id {
+      color: #CCCCCC;
+    }
+
+    body.dark-mode .section-title {
+      color: white;
+    }
+
+    body.dark-mode .section-title::after {
+      background: #7cc0b9;
     }
   </style>
 </head>
@@ -389,94 +523,106 @@
           "Tugasaurus" lahir dari kebutuhan para pejuang tugas yang ingin mengatur, mengelola, dan menyelesaikan tugas dengan lebih teratur dan santai.
         </p>
         
-        <h2 class="font-semibold text-base md:text-lg mb-4">Tim Kami</h2>
+        <h2 class="section-title">Tim Kami</h2>
         
         <!-- Desktop Team Grid -->
-        <div class="hidden md:block mb-8">
+        <div class="hidden md:block">
           <div class="team-grid">
             <div class="team-member">
               <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+                <img src="ainipic.jpg" alt="Aini Nurfadilah" class="w-full h-full object-cover rounded-full">
               </div>
-              <span>Aini Nurfadilah</span>
-              <span>(247006111021)</span>
+              <span class="team-member-name">Aini Nurfadilah</span>
+              <span class="team-member-id">247006111021</span>
             </div>
             <div class="team-member">
               <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+                <img src="darapic.jpg" alt="Dara Adzkia" class="w-full h-full object-cover rounded-full">
               </div>
-              <span>Dara Adzkia</span>
-              <span>(247006111023)</span>
+              <span class="team-member-name">Dara Adzkia</span>
+              <span class="team-member-id">247006111023</span>
             </div>
             <div class="team-member">
               <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+                <img src="rinapic.jpg" alt="Rina Natalia" class="w-full h-full object-cover rounded-full">
               </div>
-              <span>Rina Natalia</span>
-              <span>(247006111033)</span>
+              <span class="team-member-name">Rina Natalia</span>
+              <span class="team-member-id">247006111033</span>
             </div>
             <div class="team-member">
               <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+                <img src="anggipic.jpg" alt="Anggi Salsabila M" class="w-full h-full object-cover rounded-full">
               </div>
-              <span>Anggi Salsabila M</span>
-              <span>(247006111038)</span>
+              <span class="team-member-name">Anggi Salsabila M</span>
+              <span class="team-member-id">247006111038</span>
             </div>
             <div class="team-member">
               <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+                <img src="dhila.pic.jpg" alt="Fadhila Hendani" class="w-full h-full object-cover rounded-full">
               </div>
-              <span>Fadhila Hendani</span>
-              <span>(247006111053)</span>
+              <span class="team-member-name">Fadhila Hendani</span>
+              <span class="team-member-id">247006111053</span>
             </div>
           </div>
         </div>
         
         <!-- Mobile slider -->
-        <div class="md:hidden slider-container mb-8">
+        <div class="md:hidden slider-container">
           <div id="slider" class="slider">
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="ainipic.jpg" alt="Aini Nurfadilah" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Aini Nurfadilah</span>
+                <span class="team-member-id">247006111021</span>
               </div>
-              <span>Aini Nurfadilah</span>
-              <span>(247006111021)</span>
             </div>
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="darapic.jpg" alt="Dara Adzkia" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Dara Adzkia</span>
+                <span class="team-member-id">247006111023</span>
               </div>
-              <span>Dara Adzkia</span>
-              <span>(247006111023)</span>
             </div>
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="rinapic.jpg" alt="Rina Natalia" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Rina Natalia</span>
+                <span class="team-member-id">247006111033</span>
               </div>
-              <span>Rina Natalia</span>
-              <span>(247006111033)</span>
             </div>
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="anggipic.jpg" alt="Anggi Salsabila M" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Anggi Salsabila M</span>
+                <span class="team-member-id">247006111038</span>
               </div>
-              <span>Anggi Salsabila M</span>
-              <span>(247006111038)</span>
             </div>
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="dhila.pic.jpg" alt="Fadhila Hendani" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Fadhila Hendani</span>
+                <span class="team-member-id">247006111053</span>
               </div>
-              <span>Fadhila Hendani</span>
-              <span>(247006111053)</span>
             </div>
             <!-- Duplicate first slide for seamless looping -->
             <div class="slide">
-              <div class="team-member-avatar">
-                <i class="fas fa-user text-white text-2xl"></i>
+              <div class="team-member">
+                <div class="team-member-avatar">
+                  <img src="ainipic.jpg" alt="Aini Nurfadilah" class="w-full h-full object-cover rounded-full">
+                </div>
+                <span class="team-member-name">Aini Nurfadilah</span>
+                <span class="team-member-id">247006111021</span>
               </div>
-              <span>Aini Nurfadilah</span>
-              <span>(247006111021)</span>
             </div>
           </div>
           <button id="prevBtn" aria-label="Previous" class="slider-btn prev-btn">
@@ -487,9 +633,9 @@
           </button>
         </div>
         
-        <div class="max-w-3xl space-y-6">
+        <div class="max-w-3xl space-y-6 mt-8">
           <div class="flex items-start gap-3">
-            <i class="fas fa-lightbulb text-lg mt-1"></i>
+            <i class="fas fa-lightbulb text-lg mt-1 text-yellow-500"></i>
             <div>
               <p class="font-semibold text-base md:text-lg mb-1">Fakta Menarik *ciakhhh ^_^</p>
               <p class="text-xs md:text-sm" style="font-weight: 400;">
@@ -498,7 +644,7 @@
             </div>
           </div>
           <div class="flex items-start gap-3">
-            <i class="fas fa-book-open text-lg mt-1"></i>
+            <i class="fas fa-book-open text-lg mt-1 text-blue-500"></i>
             <div>
               <p class="font-semibold text-base md:text-lg mb-1">Poin Penting-nya</p>
               <p class="text-xs md:text-sm" style="font-weight: 400;">
@@ -540,7 +686,7 @@
       document.body.style.overflow = '';
     });
 
-    // Improved slider logic for seamless looping
+    // Improved slider logic for seamless looping with auto-slide
     const slider = document.getElementById('slider');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -548,6 +694,7 @@
     const totalSlides = slides.length - 1; // Subtract 1 because we have a duplicate
     let currentIndex = 0;
     let isAnimating = false;
+    let autoSlideInterval;
 
     function updateSlider() {
       if (isAnimating) return;
@@ -587,8 +734,47 @@
       updateSlider();
     }
 
-    prevBtn.addEventListener('click', goToPrev);
-    nextBtn.addEventListener('click', goToNext);
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(goToNext, 3000); // Change slide every 3 seconds
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    // Initialize slider and auto-slide for mobile
+    if (window.innerWidth <= 768) {
+      startAutoSlide();
+      
+      // Pause auto-slide when user interacts with slider
+      slider.addEventListener('mouseenter', stopAutoSlide);
+      slider.addEventListener('mouseleave', startAutoSlide);
+      prevBtn.addEventListener('mouseenter', stopAutoSlide);
+      nextBtn.addEventListener('mouseenter', stopAutoSlide);
+      prevBtn.addEventListener('mouseleave', startAutoSlide);
+      nextBtn.addEventListener('mouseleave', startAutoSlide);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      goToPrev();
+      stopAutoSlide();
+      setTimeout(startAutoSlide, 5000); // Resume auto-slide after 5 seconds
+    });
+
+    nextBtn.addEventListener('click', () => {
+      goToNext();
+      stopAutoSlide();
+      setTimeout(startAutoSlide, 5000); // Resume auto-slide after 5 seconds
+    });
+
+    // Responsive behavior for auto-slide
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && !autoSlideInterval) {
+        startAutoSlide();
+      } else if (window.innerWidth > 768 && autoSlideInterval) {
+        stopAutoSlide();
+      }
+    });
 
     // Close sidebar when clicking on a menu item (mobile)
     document.querySelectorAll('.menu button').forEach(button => {
@@ -603,5 +789,16 @@
       });
     });
   </script>
+
+  <script>
+  // Cek preferensi mode gelap dari localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  });
+</script>
+
 </body>
 </html>

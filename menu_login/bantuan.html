@@ -40,7 +40,7 @@
       font-size: 13.2px;
       flex-direction: column;
       justify-content: space-between;
-      border: 1px solid #ccc;
+      border-right: 1px solid #ccc;
       border-radius: 20px;
       height: auto;
       position: sticky;
@@ -112,6 +112,12 @@
       background: #e0e0e0;
     }
 
+    .profile-link {
+     text-decoration: none;
+     color: inherit;
+     display: block;
+     margin-top: 15px;
+    }
     /* Clickable Profile */
     .profile {
       display: flex;
@@ -122,13 +128,12 @@
       padding: 10px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      cursor: pointer;
-      transition: transform 0.2s;
-      margin-top: 20px;
+      transition: background 0.2s;
     }
 
     .profile:hover {
-      transform: translateY(-2px);
+      background: #f0f0f0;
+      cursor: pointer;
     }
 
     .profile img {
@@ -147,6 +152,82 @@
       min-height: calc(100vh - 40px);
       position: relative;
     }
+
+    /* Dark Mode Styles */
+body.dark-mode {
+  background: linear-gradient(to bottom, #333, #60CCCC);
+  color: white;
+}
+
+body.dark-mode .sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #444;
+}
+
+body.dark-mode .menu button {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .menu button:hover {
+  background: #60CCCC;
+}
+
+body.dark-mode .profile {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .faq-item {
+  border-color: #666;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .faq-question {
+  color: white;
+}
+
+body.dark-mode .faq-answer {
+  color: #CCCCCC;
+}
+
+body.dark-mode .hamburger-btn {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .hamburger-line {
+  background: white;
+}
+
+body.dark-mode .content-wrapper p {
+  color: #CCCCCC;
+}
+
+body.dark-mode a {
+  color: #60CCCC;
+}
+
+body.dark-mode .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* === ONLY fix contact/download links in dark mode === */
+body.dark-mode .manual-download a,
+body.dark-mode .contact-info a {
+  color: #115a64 !important; /* Bright cyan-blue */
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+body.dark-mode .contact-info p {
+  color: #ffffff !important; /* Pure white text */
+}
+
+/* Optional: Hover effect */
+body.dark-mode .manual-download a:hover,
+body.dark-mode .contact-info a:hover {
+  color: #0d4850 !important; 
+}
 
     @media (max-width: 768px) {
       .main-content {
@@ -307,40 +388,28 @@
     <aside id="sidebar" class="sidebar">
       <div>
         <div class="logo">
-          <img alt="Tugasaurus logo" src="logo_tugasaurus.png"/>
+          <img alt="logo" src="logo_tugasaurus.png"/>
           <h2>Tugasaurus</h2>
         </div>
         <div class="menu">
-          <button onclick="location.href='dashboardhtml'">
-            Halaman Utama
-          </button>
-          <button onclick="location.href='halamantugas.html'">
-             Halaman Tugas
-          </button>
-          <button onclick="location.href='kalender.html'">
-             Kalender Tugas
-          </button>
-          <button onclick="location.href='analisis.html'">
-             Analisis Tugas
-          </button>
-          <button onclick="location.href='pengaturan.html'">
-             Pengaturan
-          </button>
-          <button onclick="location.href='bantuan.html'">
-             Bantuan
-          </button>
-          <button onclick="location.href='tentang.html'">
-             Tentang Kami
-          </button>
+          <button onclick="location.href='dashboard.html'">Halaman Utama</button>
+          <button onclick="location.href='halamantugas.html'">Halaman Tugas</button>
+          <button onclick="location.href='kalender.html'">Kalender Tugas</button>
+          <button onclick="location.href='analisis.html'">Analisis Tugas</button>
+          <button onclick="location.href='pengaturan.html'">Pengaturan</button>
+          <button onclick="location.href='bantuan.html'">Bantuan</button>
+          <button onclick="location.href='tentang.html'">Tentang Kami</button>
         </div>
       </div>
-      <div class="profile" onclick="location.href='akun-pengguna.html'">
+      <a href="akun.html" class="profile-link">
+      <div class="profile">
         <img src="https://via.placeholder.com/40" alt="Profile">
         <div>
           <div>Akun Pengguna</div>
           <div style="font-size: 12px; color: gray;">user@example.com</div>
         </div>
       </div>
+    </a>
     </aside>
     
     <!-- Hamburger button (Mobile only) -->
@@ -416,15 +485,26 @@
         </div>
 
         <!-- Download Manual Book -->
-        <div class="mt-6">
-          <a href="manual_book.pdf" class="text-blue-500 underline">Download Manual Book</a>
-        </div>
+      <div class="mt-6 manual-download">
+        <a href="manual_book.pdf" class="text-blue-500 underline hover:text-blue-400 dark:text-blue-300 dark:hover:text-blue-200">
+        Download Manual Book
+        </a>
+      </div>
 
         <!-- Contact Information -->
-        <div class="mt-4">
-          <p>Hubungi kami melalui email: <a href="mailto:support@tugasaurus.com" class="text-blue-500 underline">support@tugasaurus.com</a></p>
-          <p>Atau WhatsApp Admin: <a href="https://wa.me/62812xxxxxxxx" class="text-blue-500 underline">+62 812-xxxx-xxxx</a></p>
-        </div>
+      <div class="mt-4 contact-info">
+          Hubungi kami melalui email: 
+          <a href="mailto:tugasaurus3@gmail.com" class="text-blue-500 underline hover:text-blue-400 dark:text-blue-300 dark:hover:text-blue-200">
+            tugasaurus3@gmail.com</a>
+          atau hubungi melalui
+          <a href="https://mail.google.com/mail/?view=cm&to=tugasaurus3@gmail.com" target="_blank" class="text-blue-500 underline hover:text-blue-400 dark:text-blue-300 dark:hover:text-blue-200">
+            Gmail
+          </a>
+        </p>
+          WhatsApp Admin: 
+          <a href="https://wa.me/6282118074897" class="text-blue-500 underline hover:text-blue-400 dark:text-blue-300 dark:hover:text-blue-200">+62 821-1807-4897</a>
+       </p>
+      </div>
       </div>
     </main>
   </div>
@@ -502,5 +582,16 @@
       button.addEventListener('click', closeMobileSidebar);
     });
   </script>
+
+  <script>
+  // Cek preferensi mode gelap dari localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  });
+</script>
+
 </body>
 </html>

@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
@@ -51,6 +51,104 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
                   backdrop-filter 0.3s ease;
     }
+
+    /* Dark Mode Styles for Additional Elements */
+
+body.dark-mode {
+  background: linear-gradient(to bottom, #333, #60CCCC);
+  color: white;
+}
+
+body.dark-mode .sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #444;
+}
+
+body.dark-mode .menu button {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .menu button:hover {
+  background: #60CCCC;
+}
+
+body.dark-mode .profile {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .sequence-container {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .sequence-header {
+  background: linear-gradient(to right, #333, #60CCCC);
+}
+
+body.dark-mode .sequence-content p-2 {
+  background: #000000;
+  color: white;
+}
+
+body.dark-mode .sequence-item {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .task-name {
+  color: white !important;
+}
+
+body.dark-mode .task-details {
+  color: #CCCCCC !important;
+  border-top: 1px dashed #666 !important;
+}
+
+body.dark-mode .priority-badge {
+  background: #60CCCC;
+}
+
+body.dark-mode .task-card {
+  background: #444;
+  color: white;
+}
+
+body.dark-mode .task-card h3 {
+  color: white;
+}
+
+body.dark-mode .task-meta span {
+  background: #555;
+  color: white;
+}
+
+body.dark-mode .task-subtasks {
+  border-top: 1px dashed #666;
+}
+
+body.dark-mode .vector-explanation {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #444;
+}
+
+body.dark-mode .explanation-header {
+  color: white;
+}
+
+body.dark-mode .explanation-content {
+  color: #CCCCCC;
+}
+
+body.dark-mode .empty-state {
+  background: rgba(255, 255, 255, 0.1);
+  color: #CCCCCC;
+}
+
+body.dark-mode .empty-state button {
+  background: #60CCCC;
+  color: white;
+}
 
     @media (max-width: 768px) {
       .sidebar {
@@ -248,9 +346,9 @@
 
     /* Gaya baru untuk barisan tugas */
     .sequence-container {
-      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.9) 100%);
+      background: rgba(255, 255, 255, 0.2) !important; /* Warna semi-transparan */;
       border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: none;
       box-shadow: 0 4px 6px rgba(0,0,0,0.05);
       overflow: hidden;
       transition: all 0.3s ease;
@@ -453,7 +551,7 @@
     .vector-explanation {
       margin: 20px 0;
       padding: 16px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
@@ -497,15 +595,36 @@
       transform: rotate(180deg);
     }
 
-    .priority-label {
-      position: absolute;
-      font-size: 12px;
-      font-weight: bold;
-      color: #333;
+    /* Gaya untuk state kosong */
+    .empty-state {
+      padding: 40px 20px;
+      text-align: center;
+      color: #666;
       background: rgba(255, 255, 255, 0.7);
-      padding: 2px 6px;
-      border-radius: 4px;
-      z-index: 10;
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    .empty-state button {
+      margin-top: 20px;
+      background: #60CCCC;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .empty-state button:hover {
+      background: #50BBBB;
+      transform: translateY(-2px);
     }
 
     @media (max-width: 768px) {
@@ -514,8 +633,8 @@
         padding: 12px;
       }
       
-      .priority-label {
-        font-size: 10px;
+      .empty-state {
+        padding: 30px 15px;
       }
     }
   </style>
@@ -530,17 +649,31 @@
           <img alt="Tugasaurus logo" src="logo_tugasaurus.png"/>
           <h2>Tugasaurus</h2>
         </div>
-       <div class="menu">
-        <button onclick="location.href='dashboard.html'">Halaman Utama</button>
-        <button onclick="location.href='halamantugas.html'">Halaman Tugas</button>
-        <button onclick="location.href='kalender.html'">Kalender Tugas</button>
-        <button onclick="location.href='analisis.html'">Analisis Tugas</button>
-        <button onclick="location.href='pengaturan.html'">Pengaturan</button>
-        <button onclick="location.href='bantuanhtml'">Bantuan</button>
-        <button onclick="location.href='tentang.html'">Tentang Kami</button>
+        <div class="menu">
+          <button onclick="location.href='index.html'">
+            Halaman Utama
+          </button>
+          <button onclick="location.href='halamantugas.html'">
+            Halaman Tugas
+          </button>
+          <button onclick="location.href='kalender.html'">
+            Kalender Tugas
+          </button>
+          <button class="active" onclick="location.href='analisistugas.html'">
+            Analisis Tugas
+          </button>
+          <button onclick="location.href='pengaturan.html'">
+            Pengaturan
+          </button>
+          <button onclick="location.href='bantuan.html'">
+            Bantuan
+          </button>
+          <button onclick="location.href='tentang.html'">
+            Tentang Kami
+          </button>
+        </div>
       </div>
-      </div>
-      <div class="profile" onclick="location.href='akun-pengguna.html'">
+      <div class="profile" onclick="location.href='akun.html'">
         <img src="https://via.placeholder.com/40" alt="Profile">
         <div>
           <div>Akun Pengguna</div>
@@ -558,14 +691,10 @@
     <main class="main-content" id="mainContent">
       <div class="content-wrapper">
         <h1 class="font-extrabold text-xl md:text-2xl mb-1">Analisis Tugas</h1>
-        <p class="text-xs md:text-sm font-semibold mb-4 text-black/60">Kelola Tugas Kamu Disini</p>
+        <p class="text-xs md:text-sm font-semibold mb-4">Kelola Tugas Kamu Disini</p>
         
         <div class="relative flex justify-center items-center h-96 border border-black rounded-md mb-4">
           <canvas id="vectorChart"></canvas>
-          <div class="priority-label" style="top: 10px; left: 50%; transform: translateX(-50%);">Prioritas Tinggi</div>
-          <div class="priority-label" style="bottom: 10px; left: 50%; transform: translateX(-50%);">Prioritas Rendah</div>
-          <div class="priority-label" style="top: 50%; left: 10px; transform: translateY(-50%); rotate: -90deg;">Usaha Sedikit</div>
-          <div class="priority-label" style="top: 50%; right: 10px; transform: translateY(-50%); rotate: 90deg;">Usaha Banyak</div>
         </div>
         
         <!-- Penjelasan Vektor yang bisa di-toggle -->
@@ -581,7 +710,7 @@
               <li><span class="font-semibold">Usaha</span> = Durasi pengerjaan / 8 - Normalisasi durasi ke skala 0-1</li>
               <li><span class="font-semibold">Prioritas</span> = (Urgensi + (1 - Usaha)) / 2 - Gabungan urgensi dan efisiensi usaha</li>
             </ul>
-            <div class="mt-3 p-3 bg-blue-50 rounded-md">
+            <div class="mt-3 p-3 bg-blue rounded-md">
               <p class="font-semibold">Contoh Perhitungan:</p>
               <p class="text-sm mt-1">Tugas "Kalkulus - Deret Tak Hingga":</p>
               <ul class="text-xs mt-1 space-y-1">
@@ -594,7 +723,7 @@
         </div>
         
         <div class="space-y-4">
-          <h2 class="font-semibold text-lg">Barisan Tugas Berdasarkan Kalkulus:</h2>
+          <h2 class="font-semibold text-lg">Barisan Tugas:</h2>
           <div class="border border-black rounded-md p-4">
             <ul id="kalkulusSequence" class="task-sequence">
               <!-- Barisan tugas akan ditambahkan di sini -->
@@ -650,7 +779,7 @@
       });
     });
 
-    // Data Tugas
+    // Data Tugas (Kosongkan array untuk melihat efek tampilan kosong)
     const tasks = [
       { 
         name: 'Kalkulus - Deret Tak Hingga', 
@@ -714,6 +843,8 @@
 
     // Mengambil data titik untuk grafik
     function getDataPoints() {
+      if (tasks.length === 0) return [];
+      
       return tasks.map((task, index) => {
         const { urgency, effort } = toVector(task);
         return {
@@ -731,6 +862,8 @@
 
     // Menghasilkan barisan tugas berdasarkan konsep barisan aritmatika
     function generateTaskSequence() {
+      if (tasks.length === 0) return [];
+      
       // Urutkan tugas berdasarkan prioritas
       const sortedTasks = [...tasks].sort((a, b) => {
         const va = toVector(a);
@@ -758,17 +891,32 @@
 
     // Menampilkan barisan tugas
     function displayTaskSequence() {
-      const sequence = generateTaskSequence();
       const sequenceContainer = document.querySelector('#kalkulusSequence').parentNode;
+      
+      // Cek jika tidak ada tugas
+      if (tasks.length === 0) {
+        sequenceContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-clipboard-list"></i>
+            <p>Belum ada tugas yang tersedia</p>
+            <button onclick="location.href='halamantugas.html'">
+              + Tambah Tugas Baru
+            </button>
+          </div>
+        `;
+        return;
+      }
+      
+      const sequence = generateTaskSequence();
       
       sequenceContainer.innerHTML = `
         <div class="sequence-container">
           <div class="sequence-header" onclick="this.parentNode.querySelector('.sequence-content').classList.toggle('hidden')">
-            <span>Barisan Tugas Berdasarkan Kalkulus</span>
+            <span>Barisan Tugas</span>
             <i class="fas fa-chevron-down transition-transform duration-300"></i>
           </div>
           <div class="sequence-content p-2">
-            <div class="mb-4 p-3 bg-blue-50 rounded-md text-sm">
+            <div class="mb-4 p-3 bg-blue-509 rounded-md text-sm">
               <h3 class="font-bold mb-2">Pengaplikasian Barisan Aritmatika:</h3>
               <p>Menggunakan rumus: <span class="font-mono">aₙ = a₁ + (n-1) × d</span></p>
               <ul class="list-disc pl-5 mt-1">
@@ -818,6 +966,20 @@
     function displayTaskList() {
       const taskListContainer = document.getElementById('taskList').parentNode;
       
+      // Cek jika tidak ada tugas
+      if (tasks.length === 0) {
+        taskListContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-tasks"></i>
+            <p>Belum ada tugas yang tersedia</p>
+            <button onclick="location.href='halamantugas.html'">
+              + Tambah Tugas Baru
+            </button>
+          </div>
+        `;
+        return;
+      }
+      
       taskListContainer.innerHTML = `
         <h2 class="font-semibold text-lg">Semua Tugas:</h2>
         <div class="task-grid" id="taskGrid"></div>
@@ -859,6 +1021,21 @@
       
       const ctx = document.getElementById('vectorChart').getContext('2d');
       const dataPoints = getDataPoints();
+      
+      // Jika tidak ada tugas, tampilkan pesan di chart
+      if (dataPoints.length === 0) {
+        document.getElementById('vectorChart').parentNode.innerHTML = `
+          <div class="empty-state h-full flex flex-col justify-center items-center">
+            <i class="fas fa-chart-pie"></i>
+            <p>Tidak ada data tugas untuk ditampilkan</p>
+            <button onclick="location.href='halamantugas.html'" class="mt-4">
+              + Tambah Tugas Baru
+            </button>
+          </div>
+        `;
+        return;
+      }
+      
       dataPoints.sort((a, b) => b.priority - a.priority);
       
       // Buat annotations untuk panah prioritas
@@ -866,9 +1043,8 @@
         return {
           type: 'line',
           borderColor: point.borderColor,
-          borderWidth: 2,
+          borderWidth: 1.2,
           label: {
-            content: `#${index + 1}`,
             enabled: true,
             position: 'center',
             backgroundColor: point.backgroundColor,
@@ -896,7 +1072,7 @@
             data: dataPoints,
             backgroundColor: dataPoints.map(p => p.backgroundColor),
             borderColor: dataPoints.map(p => p.borderColor),
-            borderWidth: 1,
+            borderWidth: 0,
             radius: dataPoints.map(p => p.radius)
           }]
         },
@@ -909,7 +1085,7 @@
               max: 1, 
               title: { 
                 display: true, 
-                text: 'Usaha (Effort)' 
+                text: 'Usaha' 
               },
               grid: { color: 'rgba(0,0,0,0.1)' }
             },
@@ -918,7 +1094,7 @@
               max: 1, 
               title: { 
                 display: true, 
-                text: 'Urgensi (Urgency)' 
+                text: 'Urgensi' 
               },
               grid: { color: 'rgba(0,0,0,0.1)' }
             }
@@ -948,5 +1124,16 @@
       new Chart(ctx, chartConfig);
     });
   </script>
+
+  <script>
+  // Cek preferensi mode gelap dari localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  });
+</script>
+
 </body>
 </html>
