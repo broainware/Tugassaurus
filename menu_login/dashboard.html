@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Poppins , Verdana, sans-serif;
+      font-family: 'Segoe UI', Poppins, Tahoma, Verdana, sans-serif;
     }
 
     body {
@@ -224,9 +224,20 @@
       }
     }
 
+/* Tambahkan di bagian CSS utama */
+.header p {
+  color: black; /* Warna abu-abu gelap */
+}
+
+/* Untuk dark mode */
+body.dark-mode .header p {
+  color: #cbd5e0; /* Warna abu-abu terang di dark mode */
+}
     .header h1 {
       font-size: 24px;
       margin: 0;
+      font-style: oblique;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
     .header p {
@@ -399,6 +410,26 @@
       gap: 10px;
     }
 
+    /* Untuk teks "Tambah Tugas Baru" */
+.modal-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Untuk input text */
+#mataKuliah,
+#sks, 
+#namaTugas,
+#tanggalTugas,
+#skorPrioritas {
+  font-size: 14px;
+}
+
+/* Untuk tombol */
+.modal-buttons button {
+  font-size: 14px;
+}
+
     /* Overlay */
     .overlay {
       position: fixed;
@@ -515,7 +546,7 @@
     }
 
     body.dark-mode .search-add input::placeholder {
-      color: #CCCCCC;
+      color: black;
     }
 
     body.dark-mode .filters button,
@@ -536,7 +567,7 @@
 
     body.dark-mode .modal-content input,
     body.dark-mode .modal-content select {
-      background-color: #666;
+      background-color: black;
       color: white;
       border: 1px solid #C0FFC8;
     }
@@ -562,6 +593,29 @@
     body.dark-mode .hamburger-line {
       background: white;
     }
+
+    /* Tambahkan ini di bagian dark mode styles */
+body.dark-mode .search-add button {
+  background-color: #C0FFC8; /* Warna dark untuk tombol */
+  color: black;
+  border: 1px solid #C0FFC8;
+}
+
+body.dark-mode .search-add button:hover {
+  background-color: #C0FFC8;
+}
+
+/* Perbaikan juga untuk input search */
+body.dark-mode .search-add input {
+  background-color: #C0FFC8;
+  color: black;
+  border: 1px solid black;
+}
+
+/* Tambahkan transition untuk efek halus */
+.search-add button {
+  transition: all 0.3s ease;
+}
 
     /* Fallback for browsers that don't support backdrop-filter */
     @supports not (backdrop-filter: blur(10px)) {

@@ -206,6 +206,69 @@
       transform: scale(0.96);
       transition: transform 0.1s ease-in-out;
     }
+
+    /* Tambahkan di bagian style */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .left-column, 
+  .right-column {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .left-column {
+    order: 2;
+    padding-top: 0;
+  }
+  
+  .right-column {
+    order: 1;
+    padding: 2rem 1rem;
+  }
+  
+  .tabs,
+  .login-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .features {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .feature-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .feature-item .icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .options {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 0.8rem;
+  }
+  
+  .login-button {
+    padding: 0.8rem;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -221,29 +284,30 @@
 
       <div class="tabs">
         <button class="tab active">Masuk</button>
-        <button class="tab" onclick="window.location.href='haldaftar.html'">Daftar</button>
+        <button class="tab" onclick="window.location.href='haldaftar.php'">Daftar</button>
       </div>
 
       <div class="login-card">
         <h2>Ayo Masuk ke Akun Kamu</h2>
-        <form>
+        <form method="POST" action="halmasuk.php">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Masukkan Email">
+          <input type="email" id="email" name="email" placeholder="Masukkan Email">
 
+           
           <label for="password">Kata Sandi</label>
-          <input type="password" id="password" placeholder="Masukkan Kata Sandi">
-
+          <input type="password" id="password" name="password" placeholder="Masukkan Kata Sandi">
+          
           <div class="options">
             <label>
               <input type="checkbox" id="show-password">
               Tampilkan Kata Sandi
             </label>
-            <a href="lupasandi.html">Lupa Kata Sandi?</a>
+            <a href="lupasandi.php">Lupa Kata Sandi?</a>
           </div>
 
-          <a href="dashboard.html" class="login-button">Masuk</a>
+          <button type="submit" class="login-button">Masuk</button>
 
-          <p class="register-link">Belum punya akun? <a href="haldaftar.html">Daftar</a></p>
+          <p class="register-link">Belum punya akun? <a href="haldaftar.php">Daftar</a></p>
         </form>
       </div>
     </div>
@@ -268,6 +332,16 @@
           </div>
         </div>
 
+        <!-- Tambahkan hamburger menu untuk fitur di mobile -->
+<button id="mobile-feature-toggle" style="display: none;">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Di dalam left-column -->
+<div class="left-column" id="features-column">
+  <!-- Konten features yang sudah ada -->
+</div>
+
         <div class="feature-item">
           <div class="icon">📈</div>
           <div>
@@ -280,6 +354,40 @@
   </div>
 
   <script>
+
+    // Tambahkan di bagian script
+document.addEventListener('DOMContentLoaded', function() {
+  const featureToggle = document.getElementById('mobile-feature-toggle');
+  const featuresColumn = document.getElementById('features-column');
+  
+  // Toggle untuk fitur di mobile
+  if (window.innerWidth <= 768) {
+    featureToggle.style.display = 'block';
+    featuresColumn.style.display = 'none';
+    
+    featureToggle.addEventListener('click', function() {
+      if (featuresColumn.style.display === 'none') {
+        featuresColumn.style.display = 'block';
+        this.innerHTML = '<i class="fas fa-times"></i>';
+      } else {
+        featuresColumn.style.display = 'none';
+        this.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+  }
+  
+  // Responsif dinamis saat resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      featureToggle.style.display = 'none';
+      featuresColumn.style.display = 'block';
+    } else {
+      featureToggle.style.display = 'block';
+      featuresColumn.style.display = 'none';
+    }
+  });
+});
+
     const checkbox = document.getElementById("show-password");
     const passwordInput = document.getElementById("password");
 
