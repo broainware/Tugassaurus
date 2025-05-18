@@ -30,29 +30,16 @@
 }
 
 
-    .container {
+   .container {
       display: flex;
       min-height: 100vh;
       position: relative;
-      width: 100vw;
-      max-width: 100%;
-      padding: 0;
-      margin:0;
+      padding: 20px;
       justify-content: flex-start;
       align-items: flex-start;
     }
 
-
-
-    @media (min-width: 769px) {
-  .container {
-    display: flex;
-    flex-direction: row;
-    padding: 30px 40px;
-  }
-}
-
-    /* Improved Sidebar */
+     /* Improved Sidebar */
     .sidebar {
       width: 250px;
       padding: 20px;
@@ -73,8 +60,6 @@
 
     @media (max-width: 768px) {
       .sidebar {
-        width: 250px;
-        flex-shrink: 0;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -116,7 +101,7 @@
       gap: 15px;
     }
 
-    .menu button {
+     .menu button {
       background: white;
       border: none;
       padding: 10px;
@@ -128,7 +113,6 @@
       align-items: center;
       gap: 10px;
       transition: background 0.3s;
-      width: 100%;
     }
 
     .menu button:hover {
@@ -139,7 +123,7 @@
      text-decoration: none;
      color: inherit;
      display: block;
-     margin-top: 15px;
+     margin-top: 40px;
     }
     
     /* Clickable Profile */
@@ -166,6 +150,12 @@
       border-radius: 50%;
       background: #ccc;
     }
+     .main-inner {
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+    }
+
 
     @media (min-width: 769px) {
   .content-wrapper {
@@ -175,12 +165,14 @@
   }
 }
 
-    /* Main Content */
+     /* Main Content */
     .main-content {
       flex: 1;
-      padding: 30px;
-      margin-left: 0;
-      width: 100%;
+      padding: 20px;
+      margin-left: 30px;
+      width: calc(100% - 300px);
+      min-height: calc(100vh - 40px);
+      position: relative;
     }
 
     @media (min-width: 769px) {
@@ -231,7 +223,7 @@
 
 /* Untuk dark mode */
 body.dark-mode .header p {
-  color: #cbd5e0; /* Warna abu-abu terang di dark mode */
+  color: #ffffff; /* Warna abu-abu terang di dark mode */
 }
     .header h1 {
       font-size: 24px;
@@ -337,7 +329,7 @@ body.dark-mode .header p {
       border: none;
       border-radius: 10px;
       background: white;
-      font-weight: bold;
+      font-weight: normal;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: background 0.2s;
@@ -346,6 +338,18 @@ body.dark-mode .header p {
     .filters button:hover, .sorts button:hover {
       background: #e0e0e0;
     }
+    .filters button.active,
+    .sorts button.active {
+    background-color: #7cdacc;
+    color: white;
+    font-weight: bold;
+    }
+    .filters button,
+    .sorts button {
+    transition: background-color 0.3s, color 0.3s;
+    }
+
+    
 
     /* Task List */
     .kotak-hijau {
@@ -357,8 +361,11 @@ body.dark-mode .header p {
     }
 
     .kotak-hijau h2 {
-      margin-bottom: 15px;
+    font-size: 1.2rem; /* lebih besar */
+    font-weight: bold; /* bold untuk "Daftar Tugas" */
+    margin-bottom: 15px;
     }
+
 
     /* Modal Styles */
     .modal {
@@ -551,9 +558,15 @@ body.dark-mode .header p {
 
     body.dark-mode .filters button,
     body.dark-mode .sorts button {
-      background: #444;
-      color: white;
+      background: #C0FFC8;
+      color: rgb(0, 0, 0);
     }
+    body.dark-mode .filters button.active,
+    body.dark-mode .sorts button.active {
+    background-color: #7cdacc; /* bisa pakai warna yang kontras di dark mode */
+    color: black;
+    }
+
 
     body.dark-mode .kotak-hijau {
       background-color: #2d3748;
@@ -697,19 +710,20 @@ body.dark-mode .search-add input {
           </div>
         </div>
 
-        <div class="filters">
-          <span>Filter Tugas :</span>
-          <button>Paling Mendesak</button>
-          <button>Mendesak</button>
-          <button>Kurang Mendesak</button>
+       <div class="filters">
+        <span>Filter:</span>
+        <button>Paling Mendesak</button>
+        <button>Mendesak</button>
+        <button>Kurang</button>
         </div>
 
         <div class="sorts">
-          <span>Urutkan :</span>
-          <button>Semua Tugas</button>
-          <button>Hari Ini</button>
-          <button>Minggu Ini</button>
+        <span>Urutkan:</span>
+        <button>Semua Tugas</button>
+        <button>Hari Ini</button>
+        <button>Minggu Ini</button>
         </div>
+
 
         <div class="kotak-hijau">
           <h2>Daftar Tugas Terbaru</h2>
@@ -725,8 +739,11 @@ body.dark-mode .search-add input {
       <input id="mataKuliah" type="text" placeholder="Masukkan Mata Kuliah">
       <input id="sks" type="number" placeholder="SKS">
       <input id="namaTugas" type="text" placeholder="Nama Tugas">
-      <input id="tanggalTugas" type="date">
-      <select id="skorPrioritas"></select>
+      <label for="tanggalTugas" class="font-semibold">Deadline</label>
+      <input type="date" id="tanggalTugas" name="tanggalTugas" />
+      <label for="skorPrioritas" class="font-semibold">Tingkat Kesulitan</label>
+        <select id="skorPrioritas"></select>
+
       <p id="sisaHariText" style="margin: 0 0 10px 0; font-weight: bold;"></p>
       <div class="modal-buttons">
         <button onclick="closeModal()">Batal</button>
@@ -763,6 +780,42 @@ body.dark-mode .search-add input {
       document.body.style.overflow = '';
     });
 
+  // Tangani tombol filter
+  const filterButtons = document.querySelectorAll('.filters button');
+  let activeFilter = null;
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (activeFilter === button) {
+        button.classList.remove('active');
+        activeFilter = null;
+      } else {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeFilter = button;
+      }
+    });
+  });
+
+  // Tangani tombol urutan
+  const sortButtons = document.querySelectorAll('.sorts button');
+  let activeSort = null;
+
+  sortButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (activeSort === button) {
+        button.classList.remove('active');
+        activeSort = null;
+      } else {
+        sortButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        activeSort = button;
+      }
+    });
+  });
+
+  
+
     // Close sidebar when clicking on a menu item (mobile)
     document.querySelectorAll('.menu button').forEach(button => {
       button.addEventListener('click', () => {
@@ -795,15 +848,24 @@ body.dark-mode .search-add input {
       }
     };
 
-    // Initialize priority select
-    document.addEventListener("DOMContentLoaded", function() {
-      const skorSelect = document.getElementById("skorPrioritas");
-      for (let i = 0; i <= 5; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `${i}/5`;
-        skorSelect.appendChild(option);
-      }
+   const descriptions = {
+  1: '1 - Sangat Mudah',
+  2: '2 - Mudah',
+  3: '3 - Sedang',
+  4: '4 - Sulit',
+  5: '5 - Sangat Sulit'
+};
+
+const select = document.getElementById('skorPrioritas');
+select.innerHTML = ''; // kosongkan dulu jika perlu
+
+for (let i = 1; i <= 5; i++) {
+  const option = document.createElement('option');
+  option.value = i;
+  option.text = descriptions[i];
+  select.appendChild(option);
+}
+
 
       // Initialize date input
       const tanggalInput = document.getElementById("tanggalTugas");
@@ -836,7 +898,7 @@ body.dark-mode .search-add input {
       if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
       }
-    });
+    
   </script>
 </body>
 </html>
