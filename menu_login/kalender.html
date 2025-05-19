@@ -269,14 +269,18 @@
       padding: 0.6rem 1rem;
       border-radius: 0.6rem;
       border: none;
-      background: white;
+      font-weight: bold;
+      background: rgb(19, 0, 0);
       box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.2s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     
     .filter-buttons button:hover {
-      background: #e0e0e0;
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
     
     .filter-buttons button.active {
@@ -291,7 +295,7 @@
   /* Contoh style aktif dan default */
   .filter-buttons button.active {
     background-color: #7cdacc; /* hijau */
-    color: white;
+    color: rgb(0, 0, 0);
   }
 
   .filter-buttons button {
@@ -367,7 +371,7 @@ body.dark-mode .calendar-subtext {
       color: black; /* tambahkan ini */
     }
     .day.selected {
-    background-color: #026b6b; /* warna lebih kontras dari yang lama */
+    background-color: #60cccc /* warna lebih kontras dari yang lama */
     color: white;
     font-weight: bold;
     box-shadow: 0 0 0 2px #3da4a4 inset;
@@ -519,7 +523,7 @@ body.dark-mode .calendar-subtext {
     <main class="main-content" id="mainContent">
       <div class="content-wrapper">
         <h1 class="font-extrabold text-xl md:text-2xl mb-1">Kalender Tugas</h1>
-        <p class="text-xs md:text-sm font-semibold mb-4 calendar-subtext">Kelola tugas kamu disini</p>
+        <p class="text-xs md:text-sm font-semibold mb-4 calendar-subtext">Kelola Tugas Kamu Disini</p>
         
         <div class="filter-section">
           <span class="filter-label">Filter Tugas:</span>

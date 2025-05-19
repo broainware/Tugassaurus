@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Poppins, Tahoma, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
 
     body {
@@ -123,7 +123,7 @@
      text-decoration: none;
      color: inherit;
      display: block;
-     margin-top: 40px;
+     margin-top: 15px;
     }
     
     /* Clickable Profile */
@@ -225,18 +225,6 @@
 body.dark-mode .header p {
   color: #ffffff; /* Warna abu-abu terang di dark mode */
 }
-    .header h1 {
-      font-size: 24px;
-      margin: 0;
-      font-style: oblique;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    .header p {
-      color: gray;
-      margin: 0;
-    }
-
     .search-add {
       display: flex;
       flex-direction: column;
@@ -294,12 +282,20 @@ body.dark-mode .header p {
     }
 
     .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
 
     .card h2 {
       font-size: 24px;
@@ -329,19 +325,23 @@ body.dark-mode .header p {
       border: none;
       border-radius: 10px;
       background: white;
-      font-weight: normal;
+      font-weight: bold;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: background 0.2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .filters button:hover, .sorts button:hover {
       background: #e0e0e0;
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
     .filters button.active,
     .sorts button.active {
     background-color: #7cdacc;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     }
     .filters button,
@@ -349,7 +349,6 @@ body.dark-mode .header p {
     transition: background-color 0.3s, color 0.3s;
     }
 
-    
 
     /* Task List */
     .kotak-hijau {
@@ -358,7 +357,13 @@ body.dark-mode .header p {
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
+    .kotak-hijau:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
 
     .kotak-hijau h2 {
     font-size: 1.2rem; /* lebih besar */
@@ -541,7 +546,12 @@ body.dark-mode .header p {
     body.dark-mode .card {
       background: #444;
       color: white;
+      
     }
+    body.dark-mode .card:hover {
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
 
     body.dark-mode .card p {
       color: #CCCCCC;
@@ -560,11 +570,13 @@ body.dark-mode .header p {
     body.dark-mode .sorts button {
       background: #C0FFC8;
       color: rgb(0, 0, 0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     body.dark-mode .filters button.active,
     body.dark-mode .sorts button.active {
     background-color: #7cdacc; /* bisa pakai warna yang kontras di dark mode */
-    color: black;
+    color: rgb(0, 0, 0);
     }
 
 
@@ -686,8 +698,8 @@ body.dark-mode .search-add input {
       <div class="content-wrapper">
         <div class="header">
           <div>
-            <h1>Hallo Mahasiswa!</h1>
-            <p>Kelola Tugas Kamu Disini</p>
+            <h1 class="font-extrabold text-xl md:text-2xl mb-1">Hallo Mahasiswa!</h1>
+            <p class="text-xs md:text-sm font-semibold mb-4 calendar-subtext">Kelola Tugas Kamu Disini</p>
           </div>
           <div class="search-add">
             <input type="text" placeholder="Cari Tugas...">
@@ -714,7 +726,7 @@ body.dark-mode .search-add input {
         <span>Filter:</span>
         <button>Paling Mendesak</button>
         <button>Mendesak</button>
-        <button>Kurang</button>
+        <button>Kurang Mendesak</button>
         </div>
 
         <div class="sorts">
@@ -813,6 +825,7 @@ body.dark-mode .search-add input {
       }
     });
   });
+  
 
   
 

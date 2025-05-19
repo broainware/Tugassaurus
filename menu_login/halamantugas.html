@@ -185,16 +185,6 @@
       }
     }
 
-    .header h1 {
-      font-size: 24px;
-      margin: 0;
-    }
-
-    .header p {
-      color: gray;
-      margin: 0;
-    }
-
     /* Button Styles */
     .btn {
       padding: 10px 15px;
@@ -229,14 +219,18 @@
       border: none;
       border-radius: 10px;
       background: white;
-      font-weight: normal;
+      font-weight: bold;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: background 0.2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .filters button:hover, .sorts button:hover {
-      background: #e0e0e0;
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      
     }
     /* Filter and Sort Buttons */
     .filters, .sorts {
@@ -249,16 +243,12 @@
     .filters button.active,
     .sorts button.active {
     background-color: #7cdacc;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     }
     .filters button,
     .sorts button {
     transition: background-color 0.3s, color 0.3s;
-    }
-    .judul-tugas {
-    font-weight: bold;
-    color: black;
     }
 
     /* Task List */
@@ -439,6 +429,8 @@
     body.dark-mode .sorts button {
       background: #C0FFC8;
       color: rgb(0, 0, 0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     body.dark-mode .filters button.active,
     body.dark-mode .sorts button.active {
@@ -538,8 +530,8 @@
       <div class="content-wrapper">
         <div class="header">
           <div>
-            <h1 class="judul-tugas">Halaman Tugas</h1>
-            <p>Kelola Tugas Kamu Disini</p>
+            <h1 class="font-extrabold text-xl md:text-2xl mb-1">Halaman Tugas</h1>
+            <p class="text-xs md:text-sm font-semibold mb-5 calendar-subtext">Kelola Tugas Kamu Disini</p>
           </div>
         </div>
 

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ganti Kata Sandi</title>
-
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(to bottom, #C0FFC8, #60CCCC);
       display: flex;
       justify-content: center;
@@ -19,18 +22,40 @@
 
     .form-container {
       background: rgba(255, 255, 255, 0.2);
-      padding: 30px;
+      padding: 30px 25px;
       border-radius: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       backdrop-filter: blur(10px);
       text-align: center;
-      width: 350px;
+      width: 100%;
+      max-width: 360px;
       position: relative;
+      margin: 20px;
+    }
+
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-section img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    .logo-section h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0;
     }
 
     h2 {
       margin-bottom: 10px;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
     }
 
@@ -41,14 +66,13 @@
     }
 
     input {
-      flex: 1;
+      width: 100%;
       padding: 10px;
       border-radius: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.2);
-      width: 90%;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       margin-bottom: 15px;
     }
 
@@ -62,7 +86,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .submit-button:hover {
@@ -97,19 +121,46 @@
       from { opacity: 0; transform: translate(-50%, -20px); }
       to { opacity: 1; transform: translate(-50%, 0); }
     }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 25px 20px;
+        width: 90%;
+      }
+
+      .logo-section img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .logo-section h2 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      input, .submit-button {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
-
 <body>
-
   <div class="form-container">
     <div id="notification" class="notification"></div>
+
+    <div class="logo-section">
+      <img src="logo_tugasaurus.png" alt="Logo Tugasaurus" />
+      <h2>Tugasaurus</h2>
+    </div>
 
     <h2>Buat Sandi Baru</h2>
     <p>Udah ganti yang baru nih, jangan dilupain lagi ya!</p>
 
-    <input type="password" id="new-password" placeholder="Kata Sandi Baru">
-    <input type="password" id="confirm-password" placeholder="Konfirmasi Kata Sandi Baru">
+    <input type="password" id="new-password" placeholder="Kata Sandi Baru" />
+    <input type="password" id="confirm-password" placeholder="Konfirmasi Kata Sandi Baru" />
 
     <button type="button" class="submit-button" onclick="changePassword()">Simpan Password Baru</button>
   </div>
@@ -136,13 +187,11 @@
         showNotif('Kata sandi belum cocok :(', 'error');
       } else {
         showNotif('Yeay sandi kamu berhasil diubah!', 'success');
-        
         setTimeout(() => {
-          window.location.href = 'dashboard.html'; 
+          window.location.href = 'dashboard.html';
         }, 1500);
       }
     }
   </script>
-
 </body>
 </html>
